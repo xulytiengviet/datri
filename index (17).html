@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>17 loại đa trị tiếng Việt | Quốc ngữ & Hán Nôm</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #faf7f2;
+      font-family: 'Segoe UI', 'Noto Serif', system-ui, sans-serif;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .dashboard {
+      max-width: 1400px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      background: linear-gradient(135deg, #4a3320, #6b4c3b);
+      color: #f7e9d7;
+      padding: 2rem 2rem 1rem;
+    }
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .header p {
+      margin-top: 0.4rem;
+      opacity: 0.85;
+      font-style: italic;
+    }
+    .tabs {
+      display: flex;
+      background: #efe2d1;
+      padding: 0 1.5rem;
+      gap: 0.2rem;
+    }
+    .tab-btn {
+      padding: 0.9rem 1.8rem;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #5b3f2b;
+      cursor: pointer;
+      border-radius: 1rem 1rem 0 0;
+      transition: 0.2s;
+      margin-right: 0.2rem;
+    }
+    .tab-btn.active {
+      background: #ffffff;
+      color: #3b2818;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    }
+    .tab-content {
+      display: none;
+      padding: 2rem 1.5rem;
+      background: #ffffff;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* cards grid */
+    .grid-17 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .amb-card {
+      background: #fefcf8;
+      border: 1px solid #e0cfba;
+      border-radius: 1.2rem;
+      padding: 1.3rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .amb-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 22px rgba(100, 60, 20, 0.15);
+      border-color: #b3926c;
+    }
+    .amb-card .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #b48b5a;
+      margin-bottom: 0.5rem;
+    }
+    .amb-card .title {
+      font-weight: 600;
+      color: #3e2e1f;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-dialog {
+      background: white;
+      max-width: 700px;
+      width: 90%;
+      max-height: 85vh;
+      border-radius: 1.8rem;
+      padding: 2rem;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 30px 45px rgba(0,0,0,0.3);
+      transform: scale(0.95);
+      transition: transform 0.2s;
+    }
+    .modal-overlay.active .modal-dialog {
+      transform: scale(1);
+    }
+    .modal-close {
+      position: absolute;
+      right: 1.2rem;
+      top: 1rem;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #75553b;
+    }
+    .modal-dialog h2 {
+      font-size: 1.7rem;
+      color: #4f3522;
+      margin-bottom: 1.2rem;
+      border-left: 6px solid #b48b5a;
+      padding-left: 1rem;
+    }
+    .info-section {
+      margin-bottom: 1.2rem;
+    }
+    .info-section h3 {
+      font-size: 1.1rem;
+      color: #6f4e34;
+      margin-bottom: 0.3rem;
+    }
+    .info-section p, .info-section div {
+      background: #fbf6ee;
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .example-dual {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .example-box {
+      flex: 1;
+      min-width: 200px;
+      background: #f2eadb;
+      border-radius: 1rem;
+      padding: 0.8rem;
+    }
+    .example-box strong {
+      color: #613c1e;
+    }
+    .nom-char {
+      font-size: 1.3rem;
+      color: #8b4c2b;
+    }
+
+    /* table compare */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .compare-table th {
+      background: #ede0cf;
+      padding: 0.8rem;
+      text-align: left;
+      color: #432c1c;
+    }
+    .compare-table td {
+      padding: 0.8rem;
+      border-bottom: 1px solid #e2d1ba;
+      vertical-align: top;
+    }
+    .compare-table tr:hover td {
+      background: #fcf8f2;
+    }
+
+    /* mindmap */
+    .mindmap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .group-box {
+      background: #fbf7ef;
+      border: 2px solid #d1b894;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      min-width: 220px;
+      flex: 1 1 250px;
+    }
+    .group-box h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: #5c3f28;
+      border-bottom: 2px dashed #c7a87b;
+      padding-bottom: 0.3rem;
+    }
+    .group-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .badge {
+      background: #fff;
+      border: 1px solid #c7a87b;
+      border-radius: 2rem;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      color: #4a2f1a;
+    }
+
+    @media (max-width: 600px) {
+      .header h1 { font-size: 1.6rem; }
+      .tabs { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard">
+  <div class="header">
+    <h1>📊 17 LOẠI ĐA TRỊ TIẾNG VIỆT</h1>
+    <p>So sánh chữ Quốc ngữ (tiếng Việt hiện đại) và chữ Hán Nôm — Ma trận hoàn chỉnh</p>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="tab1">🧩 Thẻ đa trị (Popup)</button>
+    <button class="tab-btn" data-tab="tab2">📋 Bảng so sánh</button>
+    <button class="tab-btn" data-tab="tab3">🧠 Sơ đồ Mindmap</button>
+  </div>
+
+  <!-- Tab 1: Thẻ đa trị với popup -->
+  <div id="tab1" class="tab-content active">
+    <div class="grid-17" id="cardContainer"></div>
+  </div>
+
+  <!-- Tab 2: Bảng so sánh -->
+  <div id="tab2" class="tab-content">
+    <table class="compare-table" id="compareTable"></table>
+  </div>
+
+  <!-- Tab 3: Mindmap -->
+  <div id="tab3" class="tab-content">
+    <div class="mindmap" id="mindmapContainer"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-dialog">
+    <button class="modal-close" id="closeModal">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // ---------- DỮ LIỆU 17 LOẠI ĐA TRỊ ----------
+  const data17 = [
+    { id:1, title:"Tín hiệu âm thanh", 
+      desc:"Chuỗi sóng âm không tự chứa ranh giới từ tuyệt đối.", 
+      quocngu:"Một tín hiệu nghe gần giống: 'mang đường' vs 'màn đường'.", 
+      nom:"Không trực tiếp (văn bản). Tuy nhiên khi đọc Nôm, một chữ có nhiều âm, tạo đa trị giải mã tương tự.", 
+      note:"Quốc ngữ: ASR. Nôm: giải mã âm đọc từ chữ." },
+    { id:2, title:"Một âm → nhiều từ hoặc dạng viết", 
+      desc:"Một tín hiệu âm vị có nhiều ứng viên từ vựng.", 
+      quocngu:"/za/ có thể là da, gia, ra (phương ngữ).", 
+      nom:"Âm 'ta' viết bằng 些, 它, 且, 邪... Rất phổ biến khi dịch ngược Quốc ngữ → Nôm.", 
+      note:"Quốc ngữ: homophone. Nôm: đồng âm khác tự dạng, chưa chuẩn hóa." },
+    { id:3, title:"Một dạng viết → nhiều nghĩa", 
+      desc:"Cùng surface form nhưng nhiều sense.", 
+      quocngu:"'đường' (đường đi, đường ăn, đường huyết).", 
+      nom:"Chữ 固: cố (bền), có (sở hữu), bền (tính từ). Đa nghĩa Hán-Việt + Nôm.", 
+      note:"Nôm phức tạp hơn do đa chức năng Hán-Việt." },
+    { id:4, title:"Âm tiết → từ hoặc thành tố cấu tạo từ", 
+      desc:"Âm tiết không đồng nhất với từ.", 
+      quocngu:"'học' trong 'học sinh', 'sinh học'.", 
+      nom:"Mỗi chữ Nôm là âm tiết, có thể là từ hoặc hình vị Hán-Việt, cần phân định.", 
+      note:"Cả hai cùng bản chất, Nôm thêm yếu tố Hán cổ." },
+    { id:5, title:"Đa trị ranh giới từ", 
+      desc:"Chuỗi âm tiết có nhiều phép phân đoạn.", 
+      quocngu:"'học sinh học' → [học sinh][học] hay [học][sinh học].", 
+      nom:"Văn bản Nôm không dấu cách, xen Hán-Nôm, cần vừa tách từ vừa xác định chức năng chữ.", 
+      note:"Nôm khó hơn vì có chữ Hán mượn." },
+    { id:6, title:"Đa trị từ loại", 
+      desc:"Cùng từ nhưng khác POS.", 
+      quocngu:"'đá' (danh/động), 'câu' (danh/động/lượng).", 
+      nom:"Tương tự, thêm hư từ Hán có thể gây nhập nhằng từ loại với thực từ Nôm.", 
+      note:"Giống nhau, Nôm thêm lớp Hán cổ." },
+    { id:7, title:"Đa trị cú pháp", 
+      desc:"Một câu có nhiều cây cú pháp.", 
+      quocngu:"'Tôi thấy con mèo trên mái nhà' (ai trên mái?).", 
+      nom:"Cấu trúc Hán-Việt đảo trang, ẩn chủ ngữ làm tăng số cách hiểu.", 
+      note:"Nôm cần phân tích ngữ pháp Hán cổ." },
+    { id:8, title:"Đa trị phạm vi tác động", 
+      desc:"Phủ định, lượng từ, tình thái có nhiều phạm vi.", 
+      quocngu:"'Không phải ai cũng biết' vs 'Ai cũng không biết'.", 
+      nom:"Hư từ Hán như phi, bất, giai dễ gây nhập nhằng phạm vi.", 
+      note:"Tương tự, Nôm cần nhận diện hư từ trước." },
+    { id:9, title:"Đa trị ngữ nghĩa từ vựng", 
+      desc:"Một đơn vị từ có nhiều sense.", 
+      quocngu:"'tay', 'đầu', 'chạy'...", 
+      nom:"Chữ Nôm mang cả nghĩa Hán-Việt lẫn nghĩa Nôm, tạo tầng nghĩa kép.", 
+      note:"Nôm giàu đa nghĩa hơn." },
+    { id:10, title:"Nghĩa bóng, thành ngữ, điển tích", 
+      desc:"Nghĩa toàn cụm không bằng tổng nghĩa từng từ.", 
+      quocngu:"'đầu voi đuôi chuột', 'qua cầu rút ván'.", 
+      nom:"Kho điển tích Hán đồ sộ: 'khuynh quốc khuynh thành' phải hiểu điển cố.", 
+      note:"Nôm thừa hưởng toàn bộ thành ngữ Hán." },
+    { id:11, title:"Thực thể và tên riêng", 
+      desc:"Surface form ánh xạ đến nhiều entity/concept.", 
+      quocngu:"'Hòa Bình' (tỉnh/trạng thái), 'Mai' (hoa/người).", 
+      nom:"Tên Hán-Việt lẫn Nôm, cùng chữ có thể là tên riêng hoặc từ thường.", 
+      note:"Giống nhau, Nôm thêm nhiễu." },
+    { id:12, title:"Quy chiếu và tỉnh lược", 
+      desc:"Không rõ đại từ hoặc chủ thể ẩn chỉ ai.", 
+      quocngu:"'Nam nói với Bắc rằng anh ấy sẽ đi'.", 
+      nom:"Văn Nôm thường tỉnh lược đại từ, dùng kính ngữ, quy chiếu ẩn.", 
+      note:"Nôm khó hơn do thiếu dấu hiệu hình thái." },
+    { id:13, title:"Đa trị ngữ dụng", 
+      desc:"Nghĩa thật phụ thuộc người nói, tình huống.", 
+      quocngu:"'Em giỏi quá nhỉ!' (khen/mỉa).", 
+      nom:"Ít gặp vì văn bản cổ không có đối thoại trực tiếp; mục tiêu chính là dịch nghĩa.", 
+      note:"Chỉ có ở Quốc ngữ hiện đại." },
+    { id:14, title:"Đa trị phương ngữ", 
+      desc:"Cùng biểu thức khác nghĩa/cách dùng theo vùng.", 
+      quocngu:"'mận', 'bát', 'chén' khác nghĩa Bắc/Nam.", 
+      nom:"Nôm thường dùng tự dạng riêng để ghi từng phương ngữ, ít gây nhập nhằng cùng mặt chữ.", 
+      note:"Quốc ngữ nhập nhằng hơn do cùng chữ." },
+    { id:15, title:"Đa trị lịch đại", 
+      desc:"Nghĩa thay đổi theo thời đại.", 
+      quocngu:"'thầy' từng có nghĩa 'cha'.", 
+      nom:"Đặc trưng cốt lõi: 'blời' (trời) thế kỷ 17, cách đọc thay đổi theo thời kỳ.", 
+      note:"Nôm đa dạng lịch đại vượt trội." },
+    { id:16, title:"Mất mát kênh truyền (dấu thanh, OCR)", 
+      desc:"Mất dấu, lỗi gõ, OCR làm mất thông tin.", 
+      quocngu:"'ma' → ma, má, mà, mả, mã, mạ.", 
+      nom:"OCR Nôm dễ nhầm nét, dị thể; cần top-k phục hồi. Không có hiện tượng mất dấu kiểu Latinh.", 
+      note:"Quốc ngữ: mất dấu; Nôm: mất nét, dị thể." },
+    { id:17, title:"Đa trị phong cách / ngữ vực", 
+      desc:"Trang trọng, khẩu ngữ, tiếng lóng, hành chính, văn học.", 
+      quocngu:"'chết' / 'qua đời' / 'toi' ; 'vợ' / 'bà xã'.", 
+      nom:"Văn Nôm phân biệt rõ phong cách Hán (trang trọng) và Nôm (bình dân).", 
+      note:"Cả hai đều có, Nôm thể hiện qua lựa chọn chữ." }
+  ];
+
+  // Tạo thẻ trong tab1
+  const cardContainer = document.getElementById('cardContainer');
+  data17.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'amb-card';
+    card.innerHTML = `<div class="num">${item.id}</div><div class="title">${item.title}</div>`;
+    card.addEventListener('click', () => openModal(item));
+    cardContainer.appendChild(card);
+  });
+
+  // Modal
+  const modal = document.getElementById('modal');
+  const modalBody = document.getElementById('modalBody');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  function openModal(item) {
+    const html = `
+      <h2>${item.id}. ${item.title}</h2>
+      <div class="info-section">
+        <h3>📖 Bản chất</h3>
+        <p>${item.desc}</p>
+      </div>
+      <div class="example-dual">
+        <div class="example-box">
+          <strong>🔤 Chữ Quốc ngữ (tiếng Việt)</strong><br>
+          ${item.quocngu}
+        </div>
+        <div class="example-box">
+          <strong>📜 Chữ Hán Nôm</strong><br>
+          ${item.nom}
+        </div>
+      </div>
+      <div class="info-section" style="margin-top:1rem;">
+        <h3>📝 Ghi chú so sánh</h3>
+        <p>${item.note}</p>
+      </div>
+    `;
+    modalBody.innerHTML = html;
+    modal.classList.add('active');
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+  }
+  closeModalBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+  // Tab2: Bảng so sánh
+  const compareTable = document.getElementById('compareTable');
+  let tableHTML = `<thead><tr><th>STT</th><th>Loại đa trị</th><th>Quốc ngữ (hiện tượng)</th><th>Hán Nôm (hiện tượng)</th><th>Mức độ giống/khác</th></tr></thead><tbody>`;
+  data17.forEach(item => {
+    tableHTML += `<tr>
+      <td>${item.id}</td>
+      <td><strong>${item.title}</strong></td>
+      <td>${item.quocngu}</td>
+      <td>${item.nom}</td>
+      <td>${item.note}</td>
+    </tr>`;
+  });
+  tableHTML += '</tbody>';
+  compareTable.innerHTML = tableHTML;
+
+  // Tab3: Mindmap phân nhóm
+  const groups = [
+    { name:"A. Tín hiệu & Hình thức", items:[1,2,3,16] },
+    { name:"B. Từ & Ranh giới", items:[4,5,6] },
+    { name:"C. Cấu trúc & Logic câu", items:[7,8] },
+    { name:"D. Nghĩa & Tham chiếu", items:[9,10,11,12] },
+    { name:"E. Ngữ cảnh & Biến thể", items:[13,14,15,17] }
+  ];
+  const mindmapContainer = document.getElementById('mindmapContainer');
+  groups.forEach(group => {
+    const box = document.createElement('div');
+    box.className = 'group-box';
+    const itemsHtml = group.items.map(id => {
+      const item = data17.find(d => d.id === id);
+      return `<span class="badge">${id}. ${item.title}</span>`;
+    }).join('');
+    box.innerHTML = `<h4>${group.name}</h4><div class="group-items">${itemsHtml}</div>`;
+    mindmapContainer.appendChild(box);
+  });
+
+  // Tab switching
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(c => c.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
